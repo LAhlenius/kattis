@@ -25,18 +25,20 @@ int main()
   int N;
   string aphorism;
   string alphabet{"abcdefghijklmnopqrstuvwxyz '"};
-
+  double time_one_step = M_PI * 60.0 / 15.0 /alphabet.length();
   std::cin >> N;
   while(std::cin >> aphorism){
     auto current_itr = begin(aphorism);
     auto next_itr = current_itr + 1;
-    int total_distance{0};
+    int total_steps{0};
     while(next_itr != end(aphorism)){
-       total_distance += distance_between_chars_cyclic(alphabet, *current_itr, *next_itr);
+       total_steps += distance_between_chars_cyclic(alphabet, *current_itr, *next_itr);
        ++current_itr;
        ++next_itr;
     }
-    std::cout << std::to_string(total_distance) << std::endl << std::to_string(N) << std::endl;
+    double running_time = total_steps * time_one_step;
+    double total_time = running_time + aphorism.length() * 1.0; //running time + pickup time
+    std::cout << std::to_string(total_time) << std::endl;
   if(!(--N))
     break;
   }
