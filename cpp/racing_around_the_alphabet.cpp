@@ -6,7 +6,7 @@
 
 using std::string;
 
-int distance_between_chars_cyclic(string const & structure, string const & a, string const & b)
+int distance_between_chars_cyclic(string const & structure, char const & a, char const & b)
 {
   int length = structure.length();
   auto a_pos = structure.find(a);
@@ -22,6 +22,22 @@ int distance_between_chars_cyclic(string const & structure, string const & a, st
 
 int main()
 {
-  auto asd =distance_between_chars_cyclic("abcdefghijklmnopqrstuvwxyz '", "a", "'");
-  std::cout << std::to_string(asd) << std::endl;
+  int N;
+  string aphorism;
+  string alphabet{"abcdefghijklmnopqrstuvwxyz '"};
+
+  std::cin >> N;
+  while(std::cin >> aphorism){
+    auto current_itr = begin(aphorism);
+    auto next_itr = current_itr + 1;
+    int total_distance{0};
+    while(next_itr != end(aphorism)){
+       total_distance += distance_between_chars_cyclic(alphabet, *current_itr, *next_itr);
+       ++current_itr;
+       ++next_itr;
+    }
+    std::cout << std::to_string(total_distance) << std::endl << std::to_string(N) << std::endl;
+  if(!(--N))
+    break;
+  }
 }
